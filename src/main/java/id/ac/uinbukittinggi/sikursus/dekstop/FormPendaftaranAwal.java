@@ -249,19 +249,28 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
         DecimalFormat df = new DecimalFormat("#,###,###");
 
         // 5. Output ke Text Area (Desain Struk)
-        String hasil = "======================================\n" +
-                       "          BUKTI PENDAFTARAN           \n" +
-                       "======================================\n" +
-                       "Nama Pendaftar\t: " + nama + "\n" +
-                       "Pilihan Kursus\t: " + kursus + "\n" +
-                       "Biaya per Orang\t: Rp " + df.format(biaya) + "\n" +
-                       "Jumlah Peserta\t: " + jumlah + " Orang\n" +
-                       "--------------------------------------\n" +
-                       "Sub Total\t\t: Rp " + df.format(subTotal) + "\n" +
-                       "Diskon\t\t: Rp " + df.format(diskon) + "\n" +
-                       "--------------------------------------\n" +
-                       "TOTAL BAYAR\t: Rp " + df.format(totalAkhir) + "\n" +
-                       "======================================";
+       String hasil = String.format(
+            "==========================================\n" +
+            "            BUKTI PENDAFTARAN             \n" +
+            "==========================================\n" +
+            "%-18s : %s\n" +
+            "%-18s : %s\n" +
+            "%-18s : Rp %s\n" +
+            "%-18s : %d Orang\n" +
+            "------------------------------------------\n" +
+            "%-18s : Rp %s\n" +
+            "%-18s : Rp %s\n" +
+            "------------------------------------------\n" +
+            "%-18s : Rp %s\n" +
+            "==========================================", 
+            "Nama Pendaftar", nama, 
+            "Pilihan Kursus", kursus, 
+            "Biaya per Orang", df.format(biaya), 
+            "Jumlah Peserta", jumlah, 
+            "Sub Total", df.format(subTotal), 
+            "Diskon", df.format(diskon), 
+            "TOTAL BAYAR", df.format(totalAkhir)
+        );
                        
         txtHasil.setText(hasil);
 

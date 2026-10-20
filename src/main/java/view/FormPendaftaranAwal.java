@@ -211,12 +211,14 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
             Kursus kursus = new Kursus(kode, nama, level, biaya);
             double total = kursus.hitungBiayaSetelahDiskon(diskon);
 
-            String pesan = "Kursus: " + nama
-                    + "\nKode: " + kode
-                    + "\nLevel: " + level
-                    + "\nBiaya awal: Rp" + String.format("%,.0f", biaya)
-                    + "\nDiskon: " + diskon + "%"
-                    + "\nBiaya akhir: Rp" + String.format("%,.0f", total);
+            String pesan = "Kursus: " + kursus.getNama()
+        + "\nKode: " + kursus.getKode()
+        + "\nLevel: " + kursus.getLevel()
+        + "\nBiaya awal: Rp"
+        + String.format("%,.0f", kursus.getBiaya())
+        + "\nDiskon: " + diskon + "%"
+        + "\nBiaya akhir: Rp"
+        + String.format("%,.0f", total);
 
             JOptionPane.showMessageDialog(this,
                     pesan,

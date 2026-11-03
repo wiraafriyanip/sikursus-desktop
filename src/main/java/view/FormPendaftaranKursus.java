@@ -223,6 +223,7 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
         btnProses = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        btnKelola = new javax.swing.JButton();
         lblOffline = new javax.swing.JLabel();
         pnlFiller = new javax.swing.JPanel();
         pnlHasil = new javax.swing.JPanel();
@@ -704,11 +705,29 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 21, 6, 21);
         pnlInput.add(pnlTombol, gridBagConstraints);
 
+        btnKelola.setBackground(new java.awt.Color(22, 54, 69));
+        btnKelola.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnKelola.setForeground(new java.awt.Color(255, 255, 255));
+        btnKelola.setText("BUKA MASTER PESERTA  ");
+        btnKelola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKelolaActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(1, 21, 8, 21);
+        pnlInput.add(btnKelola, gridBagConstraints);
+
         lblOffline.setForeground(new java.awt.Color(102, 121, 132));
         lblOffline.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -719,7 +738,7 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
         pnlFiller.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -834,6 +853,10 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnKelolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaActionPerformed
+        new PesertaFrame().setVisible(true);
+    }//GEN-LAST:event_btnKelolaActionPerformed
+
     private void buatRingkasanPendaftaran() {
         String nama = txtNama.getText().trim();
         String jenis = getJenisPeserta();
@@ -882,6 +905,12 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
                     txtEmail.getText().trim());
             boolean tersimpan = new PesertaDAO().insert(p);
             if (tersimpan) {
+                // Sinkronkan JTable Master Peserta bila jendelanya sedang terbuka.
+                for (java.awt.Window window : java.awt.Window.getWindows()) {
+                    if (window instanceof PesertaFrame && window.isDisplayable()) {
+                        ((PesertaFrame) window).refreshFromRegistration();
+                    }
+                }
                 lblDbStatus.setText("TERSIMPAN  |  ID peserta: " + p.getIdPeserta()
                         + " | NIM: " + p.getNim());
                 JOptionPane.showMessageDialog(this,
@@ -934,6 +963,7 @@ public class FormPendaftaranKursus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKelola;
     private javax.swing.JButton btnProses;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;

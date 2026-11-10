@@ -2,6 +2,7 @@ package model;
 
 /** Model kursus pertemuan 4, diperbaiki sesuai latihan enkapsulasi pertemuan 6. */
 public class Kursus {
+    private int idKursus;
     private String kode;
     private String nama;
     private String level;
@@ -12,10 +13,22 @@ public class Kursus {
     }
 
     public Kursus(String kode, String nama, String level, double biaya) {
+        this(0, kode, nama, level, biaya);
+    }
+
+    /** Constructor untuk baris kursus yang dibaca dari MySQL. */
+    public Kursus(int idKursus, String kode, String nama, String level, double biaya) {
+        setIdKursus(idKursus);
         setKode(kode);
         setNama(nama);
         setLevel(level);
         setBiaya(biaya);
+    }
+
+    public int getIdKursus() { return idKursus; }
+    public void setIdKursus(int idKursus) {
+        if (idKursus < 0) throw new IllegalArgumentException("ID kursus tidak boleh negatif");
+        this.idKursus = idKursus;
     }
 
     public String getKode() { return kode; }
@@ -46,6 +59,9 @@ public class Kursus {
             throw new IllegalArgumentException("Biaya tidak boleh negatif atau tidak valid");
         this.biaya = biaya;
     }
+
+    @Override
+    public String toString() { return kode + " - " + nama; }
 
     /** Method dari pertemuan 4 tetap tersedia untuk GUI dan DemoKursus lama. */
     public double hitungBiayaSetelahDiskon(double persenDiskon) {

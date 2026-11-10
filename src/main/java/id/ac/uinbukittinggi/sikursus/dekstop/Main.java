@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.uinbukittinggi.sikursus.dekstop;
 
-/**
- *
- * @author USER
- */
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import view.LoginFrame;
+
+/** Titik masuk aplikasi: setiap proses baru dimulai dari LoginFrame. */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("SIKURSUS Dekstop siap dikembangkan");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+            // Gunakan Look and Feel bawaan Java jika tema sistem tidak tersedia.
+        }
+        SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
     }
 }

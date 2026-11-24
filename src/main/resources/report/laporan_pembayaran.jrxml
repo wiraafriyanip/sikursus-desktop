@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_pembayaran" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="24" rightMargin="24" topMargin="20" bottomMargin="20" uuid="1a46552e-800e-477e-9f1f-9edb0278a593">
+  <property name="net.sf.jasperreports.default.font.name" value="SansSerif"/>
+  <parameter name="P_TANGGAL_AWAL" class="java.sql.Date"/><parameter name="P_TANGGAL_AKHIR" class="java.sql.Date"/>
+  <queryString language="SQL"><![CDATA[SELECT
+  pb.id_pembayaran,
+  pb.tanggal_bayar,
+  pb.nominal,
+  pb.metode,
+  pb.status AS status_pembayaran,
+  p.id_pendaftaran,
+  ps.nim,
+  ps.nama AS nama_peserta,
+  kls.nama_kelas,
+  krs.nama_kursus
+FROM pembayaran pb
+INNER JOIN pendaftaran p ON pb.id_pendaftaran = p.id_pendaftaran
+INNER JOIN peserta ps ON p.id_peserta = ps.id_peserta
+INNER JOIN kelas kls ON p.id_kelas = kls.id_kelas
+INNER JOIN kursus krs ON kls.id_kursus = krs.id_kursus
+WHERE pb.tanggal_bayar BETWEEN $P{P_TANGGAL_AWAL} AND $P{P_TANGGAL_AKHIR}
+ORDER BY pb.tanggal_bayar, pb.id_pembayaran]]></queryString>
+  <field name="id_pembayaran" class="java.lang.Integer"/>
+<field name="tanggal_bayar" class="java.sql.Date"/>
+<field name="nominal" class="java.math.BigDecimal"/>
+<field name="metode" class="java.lang.String"/>
+<field name="status_pembayaran" class="java.lang.String"/>
+<field name="id_pendaftaran" class="java.lang.Integer"/>
+<field name="nim" class="java.lang.String"/>
+<field name="nama_peserta" class="java.lang.String"/>
+<field name="nama_kelas" class="java.lang.String"/>
+<field name="nama_kursus" class="java.lang.String"/>
+  <title><band height="62">
+      <rectangle><reportElement x="0" y="0" width="794" height="62" backcolor="#163645" mode="Opaque"/></rectangle>
+      <staticText>
+      <reportElement x="18" y="8" width="758" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="18" isBold="true"/></textElement>
+      <text><![CDATA[LAPORAN PEMBAYARAN KURSUS]]></text>
+    </staticText>
+      <staticText>
+      <reportElement x="18" y="36" width="758" height="16" forecolor="#D5E5E6"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
+      <text><![CDATA[Transaksi pembayaran berdasarkan rentang tanggal]]></text>
+    </staticText>
+    </band></title>
+  <pageHeader><band height="25">
+      <staticText>
+      <reportElement x="0" y="2" width="397" height="18" forecolor="#6F8490"></reportElement>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="false"/></textElement>
+      <text><![CDATA[SIKURSUS Desktop  |  Sistem Informasi Manajemen Kursus]]></text>
+    </staticText>
+      <textField pattern="dd MMMM yyyy"><reportElement x="397" y="2" width="397" height="18" forecolor="#6F8490"/><textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement><textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression></textField>
+    </band></pageHeader>
+  <columnHeader><band height="28"><rectangle><reportElement x="0" y="0" width="38" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="3" y="0" width="32" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[ID]]></text>
+    </staticText><rectangle><reportElement x="38" y="0" width="80" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="41" y="0" width="74" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Tanggal]]></text>
+    </staticText><rectangle><reportElement x="118" y="0" width="72" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="121" y="0" width="66" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[NIM]]></text>
+    </staticText><rectangle><reportElement x="190" y="0" width="118" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="193" y="0" width="112" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Peserta]]></text>
+    </staticText><rectangle><reportElement x="308" y="0" width="82" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="311" y="0" width="76" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Kelas]]></text>
+    </staticText><rectangle><reportElement x="390" y="0" width="130" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="393" y="0" width="124" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Kursus]]></text>
+    </staticText><rectangle><reportElement x="520" y="0" width="95" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="523" y="0" width="89" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Nominal]]></text>
+    </staticText><rectangle><reportElement x="615" y="0" width="80" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="618" y="0" width="74" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Metode]]></text>
+    </staticText><rectangle><reportElement x="695" y="0" width="75" height="28" backcolor="#163645" mode="Opaque"/></rectangle><staticText>
+      <reportElement x="698" y="0" width="69" height="28" forecolor="#FFFFFF"></reportElement>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+      <text><![CDATA[Status]]></text>
+    </staticText></band></columnHeader>
+  <detail><band height="25"><rectangle><reportElement x="0" y="0" width="38" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="3" y="0" width="32" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{id_pembayaran}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="38" y="0" width="80" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true" pattern="dd-MM-yyyy">
+      <reportElement x="41" y="0" width="74" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{tanggal_bayar}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="118" y="0" width="72" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="121" y="0" width="66" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{nim}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="190" y="0" width="118" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="193" y="0" width="112" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{nama_peserta}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="308" y="0" width="82" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="311" y="0" width="76" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{nama_kelas}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="390" y="0" width="130" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="393" y="0" width="124" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{nama_kursus}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="520" y="0" width="95" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true" pattern="#,##0.00">
+      <reportElement x="523" y="0" width="89" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="615" y="0" width="80" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="618" y="0" width="74" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{metode}]]></textFieldExpression>
+    </textField><rectangle><reportElement x="695" y="0" width="75" height="25" backcolor="#F5FAF9" mode="Opaque"><printWhenExpression><![CDATA[($V{REPORT_COUNT} % 2) == 0]]></printWhenExpression></reportElement></rectangle><textField isStretchWithOverflow="true">
+      <reportElement x="698" y="0" width="69" height="25" forecolor="#193846"/>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8"/></textElement>
+      <textFieldExpression><![CDATA[$F{status_pembayaran}]]></textFieldExpression>
+    </textField></band></detail>
+  <pageFooter><band height="24">
+          <line><reportElement x="0" y="0" width="794" height="1" forecolor="#D6E2E2"/></line>
+          <staticText>
+      <reportElement x="0" y="4" width="694" height="16" forecolor="#6F8490"></reportElement>
+      <textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="7" isBold="false"/></textElement>
+      <text><![CDATA[Dokumen dicetak melalui aplikasi SIKURSUS Desktop]]></text>
+    </staticText>
+          <textField><reportElement x="694" y="4" width="100" height="16" forecolor="#6F8490"/><textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="7"/></textElement><textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+        </band></pageFooter>
+  <summary><band height="8"/></summary>
+</jasperReport>

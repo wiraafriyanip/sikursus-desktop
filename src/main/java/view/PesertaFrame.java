@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.Peserta;
+import report.ReportService;
 
 /**
  * Pertemuan 10: Master Peserta, memperluas INSERT P9 menjadi CRUD lengkap.
@@ -70,7 +71,7 @@ public class PesertaFrame extends javax.swing.JFrame {
         pnlEditor.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(220, 230, 228)));
         pnlDaftar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(220, 230, 228)));
         for (javax.swing.JButton button : new javax.swing.JButton[]{
-                btnSimpan, btnUbah, btnHapus, btnReset, btnMuat, btnCari}) {
+                btnSimpan, btnUbah, btnHapus, btnReset, btnMuat, btnCari, btnCetak}) {
             button.setFocusPainted(false);
             button.setPreferredSize(new Dimension(120, 37));
         }
@@ -131,6 +132,7 @@ public class PesertaFrame extends javax.swing.JFrame {
         styleAction(btnReset, new java.awt.Color(228, 239, 240), ink);
         styleAction(btnMuat, new java.awt.Color(228, 239, 240), ink);
         styleAction(btnCari, new java.awt.Color(13, 123, 102), java.awt.Color.WHITE);
+        styleAction(btnCetak, new java.awt.Color(12, 153, 119), java.awt.Color.WHITE);
         btnCari.setPreferredSize(new java.awt.Dimension(94, 36));
 
         // Kepala tabel dulu tidak terbaca (warna putih pada latar terang).
@@ -261,6 +263,7 @@ public class PesertaFrame extends javax.swing.JFrame {
         btnCari.addActionListener(e -> cari());
         btnReset.addActionListener(e -> resetSemua());
         btnMuat.addActionListener(e -> refreshData());
+        btnCetak.addActionListener(e -> ReportService.tampilkanLaporanPeserta());
         txtCari.addActionListener(e -> cari());
         getRootPane().setDefaultButton(btnCari);
     }
@@ -522,6 +525,7 @@ public class PesertaFrame extends javax.swing.JFrame {
         btnHapus = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         btnMuat = new javax.swing.JButton();
+        btnCetak = new javax.swing.JButton();
         lblTerpilih = new javax.swing.JLabel();
         pnlFillerEditor = new javax.swing.JPanel();
         pnlDaftar = new javax.swing.JPanel();
@@ -854,6 +858,19 @@ public class PesertaFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         pnlAksi.add(btnMuat, gridBagConstraints);
 
+        btnCetak.setBackground(new java.awt.Color(12, 153, 119));
+        btnCetak.setForeground(new java.awt.Color(255, 255, 255));
+        btnCetak.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnCetak.setText("CETAK LAPORAN");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        pnlAksi.add(btnCetak, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1043,6 +1060,7 @@ public class PesertaFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgJenisKelamin;
     private javax.swing.JButton btnCari;
+    private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnMuat;
     private javax.swing.JButton btnReset;
